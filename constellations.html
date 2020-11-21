@@ -77,6 +77,8 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
         wait:3,
         rewind:true
     });
+
+    instructions.on("complete",)
     makeUrsaMajor(); //show makeursaMajor with instructions
     stage.update();
 }
@@ -167,7 +169,7 @@ loop(ursaMinorLines.points, function (point, i){
     const ursaMinorLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
     if (ursaMinorLabel.text == 8){ursaMinorLabel.pos(650,210)}
 
-});
+
 
 ursaMinorLines.on("complete", ()=>{
     let um2 = asset("ursaminor.png").alp(0).sca(.5).rot(-20);
@@ -175,12 +177,16 @@ ursaMinorLines.on("complete", ()=>{
 
     ursaMinorLines.animate({alpha:.4, time:.5}); //
     ursaMinor.stopAnimate(); //stop star animation
-    um2.centerReg(ursaMinorLines).mov(-110,-30).animate({alpha:0.8,time:2});
+    um2.centerReg(ursaMinorLines).mov(-110,-30).animate({alpha:.9,time:1.5});
     um2Title.loc(ursaMinor).mov(0,-80).animate({alpha:1,time:1});
+    
     sound.play();
+    ursaMinorLabel.removeFrom();
     makeCygnus();
 });
+
 stage.update();
+});
 }
 
 
@@ -218,7 +224,6 @@ loop(cygnusLines.points, function (point, i){
     const cygnusLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
     if (cygnusLabel.text == 1){cygnusLabel.mov(-40,0)}
 
-});
 
 cygnusLines.on("complete", ()=>{
     let cyg = asset("cygnus.png").alp(0).sca(1.5).rot(-215);
@@ -229,15 +234,17 @@ cygnusLines.on("complete", ()=>{
     cyg.centerReg(cygnusLines).mov(30,20).animate({alpha:0.8,time:2});
     cygTitle.loc(cygnus).mov(-175,-40).animate({alpha:1,time:1});
     sound.play();
+    cygnusLabel.removeFrom();
     makeCapricorn();
 });
 stage.update();
+});
 }
 
 
 //makeCapricorn();
 function makeCapricorn() {
-const capricornPoints = [[0,0],[-246.4,50],[-428.5,39.2],[-468.4,30.4],[-351.6,165.5],[-263.8,231.7],[-175.9,277.1]];
+const capricornPoints = [[0,0],[-246.4,50],[-428.5,39.2],[-468.4,30.4],[-351.6,165.5],[-263.8,231.7],[-175.9,277.1],[0,0]];
 
 const capricorn = new Poly(25, 5, 2, white).centerReg().mov(525,-400).rot(10).noMouse();
 capricorn.animate({
@@ -272,7 +279,6 @@ loop(capricornLines.points, function (point, i){
     if (capricornLabel.text == 6){capricornLabel.mov(0,15)}
     if (capricornLabel.text == 7){capricornLabel.mov(20,0)}
 
-});
 
 capricornLines.on("complete", ()=>{
     let cap = asset("capricorn.png").alp(0).sca(.6).rot(35);
@@ -282,10 +288,12 @@ capricornLines.on("complete", ()=>{
     capricorn.stopAnimate(); //stop star animation
     cap.centerReg(capricornLines).mov(30,0).animate({alpha:0.8,time:2});
     capTitle.loc(capricorn).mov(50,0).animate({alpha:1,time:1});
+    capricornLabel.removeFrom();
     sound.play();
     makeDelphinus();
 });
 stage.update();
+});
 }
 
 //makeDelphinus();
@@ -322,8 +330,6 @@ loop(delphinusLines.points, function (point, i){
     if (delphLabel.text == 4){delphLabel.mov(-40,40)}
 
 
-});
-
 delphinusLines.on("complete", ()=>{
     let delph = asset("delphinus.png").alp(0).sca(.5);
     let delphTitle = new Label({text:"delphinus",color:white, font:'Amatic SC', size:48}).alp(0);
@@ -333,9 +339,11 @@ delphinusLines.on("complete", ()=>{
     delph.centerReg(delphinusLines).mov(-10,0).animate({alpha:0.8,time:2});
     delphTitle.loc(delphinus).mov(-225,0).animate({alpha:1,time:1});
     sound.play();
+    delphLabel.removeFrom();
     makeLeo ();
 });
 stage.update();
+});
 }
 
 //makeLeo();
@@ -375,9 +383,6 @@ loop(leoLines.points, function (point, i){
     if (leoLabel.text == 10){leoLabel.mov(10,25)}
 
 
-});
-
-
 leoLines.on("complete", ()=>{
     let leos = asset("leo.png").alp(0).sca(1.3).rot(10);
     let leoTitle = new Label({text:"leo",color:white, font:'Amatic SC', size:56}).alp(0);
@@ -386,8 +391,10 @@ leoLines.on("complete", ()=>{
     leo.stopAnimate(); //stop star animation
     leos.centerReg(leoLines).mov(-40,20).animate({alpha:0.8,time:2});
     leoTitle.loc(leo).mov(30,30).animate({alpha:1,time:1});
+    leoLabel.removeFrom();
     sound.play();
     ending();
+});
 });
 }
 
