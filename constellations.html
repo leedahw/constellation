@@ -26,7 +26,7 @@ const width = 1920;
 const height = 1080;
 const color = black; // ZIM colors like green, blue, pink, faint, clear, etc.
 const outerColor = black; // any HTML colors like "violet", "#333", etc. are fine to use
-const assets = ["sky.jpg", "ursamajor.png", "ursaminor.png","cygnus.png","capricorn.png","delphinus.png","leo.png", "jingle.mp3", {src:"https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"}];
+const assets = ["sky.jpg", "ursamajor.png", "ursaminor.png","cygnus.png","capricorn.png","delphinus.png","leo.png", {id: "sound", maxNum1:1, src:"jingle.mp3"}, {src:"https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"}];
 const path = "assets/";
 
 const frame = new Frame(scaling, width, height, color, outerColor, assets, path);
@@ -115,11 +115,13 @@ const ursaMajorLines = new Connectors({
     deleteNode:false,
 }).loc(ursaMajor);
 
-const um1dots = new Container().loc(ursaMajor);
+let um1dots = new Container().loc(ursaMajor);
 //labels
+    let dots
+    let ursaMajorLabel
 loop(ursaMajorLines.points,function (point, i){
-    const dots = new Poly(25,5,2,faint).loc(point[0]+20,point[1]-20,um1dots).noMouse();
-    const ursaMajorLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
+    dots = new Poly(25,5,2,faint).loc(point[0]+20,point[1]-20,um1dots).noMouse();
+    ursaMajorLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
     if (ursaMajorLabel.text == 4){ursaMajorLabel.mov(-50,30)}
 
 });
@@ -132,7 +134,8 @@ ursaMajorLines.on("complete", ()=>{
     ursaMajor.stopAnimate(); //stop star animation
     um1.centerReg(ursaMajorLines).mov(50,100).animate({props:{alpha:0.8}, time:2});
     um1Title.loc(ursaMajor).mov(50,-20).animate({alpha:1, time:1});
-    sound.play(zog("hi"));
+    um1dots.removeFrom(zog("remove me"));
+    sound.play();
     makeUrsaMinor();
 });
 stage.update();
@@ -166,9 +169,11 @@ const ursaMinorLines = new Connectors({
 
 const um2dots = new Container().loc(ursaMinor);
 //labels
+let dots
+let ursaMinorLabel
 loop(ursaMinorLines.points, function (point, i){
-    const dots = new Poly(25,5,2,faint).loc(point[0]+20,point[1]-20,um2dots).noMouse();
-    const ursaMinorLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
+     dots = new Poly(25,5,2,faint).loc(point[0]+20,point[1]-20,um2dots).noMouse();
+    ursaMinorLabel = new Label ({text:i+1, color:white, valign:CENTER, align:CENTER, size: 30, font:'Amatic SC'}).loc(dots);
     if (ursaMinorLabel.text == 8){ursaMinorLabel.pos(650,210)}
 
 });
@@ -181,7 +186,7 @@ ursaMinorLines.on("complete", ()=>{
     ursaMinor.stopAnimate(); //stop star animation
     um2.centerReg(ursaMinorLines).mov(-110,-30).animate({alpha:0.8,time:2});
     um2Title.loc(ursaMinor).mov(0,-80).animate({alpha:1,time:1});
-    sound.play();
+    sound.play(zog("hello"));
     makeCygnus();
 });
 stage.update();

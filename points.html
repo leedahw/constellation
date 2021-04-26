@@ -26,7 +26,7 @@ const width = 1920;
 const height = 1080;
 const color = white; // ZIM colors like green, blue, pink, faint, clear, etc.
 const outerColor = light; // any HTML colors like "violet", "#333", etc. are fine to use
-const assets = ["starsss.jpg", {src:"https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"}];
+const assets = ["poly.png", {src:"https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"}];
 const path = "assets/";
 
 const frame = new Frame(scaling, width, height, color, outerColor,assets,path);
@@ -48,9 +48,10 @@ frame.on("ready", () => { // ES6 Arrow Function - like function(){}
 
     // put your code here (you can delete this sample code)
     //get points for contellations
-let jpg = frame.asset("starsss.jpg").sca(.3).center();
-        let constellation = new Squiggle({
-            points:9,
+let jpg = frame.asset("poly.png").sca(1).center(stage);
+        let constellation = new Blob({
+            color: "rgba(255,19,18,.5)",
+            points:5,
             controlType:"none",
 
         }).addTo();
